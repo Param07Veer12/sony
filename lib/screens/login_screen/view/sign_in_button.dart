@@ -12,8 +12,9 @@ class _SignInButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: /*state.mobileNumber==""? ()=>context.read<SignInCubit>().checkMobileNumberValidation():*/
           //state.notValidNumber?null
-           ()=> print("sdkbhj"),
-           //context.read<SignInCubit>().callValidateLoginApi(),
+           ()=> 
+          //  print("sdkbhj"),
+           context.read<LoginScreenBloc>().callValidateLoginApi(),
           child: const Text("Log In",style: TextStyle(color: Colors.white)),
           style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(customMaterialColor(themeColor)),

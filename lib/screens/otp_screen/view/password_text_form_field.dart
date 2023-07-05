@@ -1,17 +1,18 @@
-part of 'login_screen.dart';
+part of 'otp_screen.dart';
 
-class _EnterMobileTextFromField extends StatelessWidget {
-  const _EnterMobileTextFromField({Key? key}) : super(key: key);
+class _EnterPasswordTextFromField extends StatelessWidget {
+  const _EnterPasswordTextFromField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginScreenBloc, LoginScreenState>(
    //     buildWhen: (previous, current) => previous.mobileNumber != current.mobileNumber,
         builder: (context, state) {
-          return  Material(
-             color: Colors.transparent,
+          return Material(
+                         color: Colors.transparent,
             elevation: 5.0,
               shadowColor: Colors.grey,
+
             child: TextFormField(
               textInputAction: TextInputAction.done,
               cursorColor: Colors.black,
@@ -20,7 +21,7 @@ class _EnterMobileTextFromField extends StatelessWidget {
               // context.read<LoginScreenBloc>().onMobileNumberChange(mobileNumber)
                
               decoration: InputDecoration(
-                  hintText: '| Enter user name',
+                  hintText: '| Enter Password',
                   fillColor: Colors.white,
                   filled: true,
                   contentPadding: const EdgeInsets.all(15),

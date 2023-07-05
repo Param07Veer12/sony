@@ -10,4 +10,10 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
       // TODO: implement event handler
     });
   }
+
+ callValidateLoginApi()
+{
+emit(LoginSucess());
+}
+  
 }

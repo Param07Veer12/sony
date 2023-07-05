@@ -18,17 +18,20 @@ final String heading;
       ),
     ),
       padding: EdgeInsets.only(
-       bottom: 5, // Space between underline and text
+       bottom: 5,
+       // Space between underline and text
      ),
-     decoration: BoxDecoration(
-         border: Border(bottom: BorderSide(
-         color: themeColor, 
-         width: 2.0,
-         // Underline thickness
-        ))
-      ),
-      width: 50,
-      height: 50,
+    //  decoration: BoxDecoration( 
+    //      border: Border(bottom: BorderSide(
+    //      color: themeColor, 
+    //      width: 2.0,
+          
+    //      // Underline thickness
+    //     ))
+    //   ),
+      width: 35,
+      height: 35,
       );
   }
 }
+

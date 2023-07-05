@@ -1,4 +1,4 @@
-part of 'login_screen.dart';
+part of 'otp_screen.dart';
 
 class _EnterMobileTextFromField extends StatelessWidget {
   const _EnterMobileTextFromField({Key? key}) : super(key: key);

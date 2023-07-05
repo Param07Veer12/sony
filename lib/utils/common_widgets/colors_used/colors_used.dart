@@ -6,6 +6,7 @@ const textFieldColor= Color(0xffe5edf2);
 const themeColor=Color.fromRGBO(0, 95, 179, 1);
 const disabledButtonColor=Color(0xff808080);
 const lightTextBgColor = Color.fromRGBO(116, 116, 116, 1);
+const transparentColor= Color.fromRGBO(116, 116, 116, 0);
 
 
 
