@@ -13,7 +13,9 @@ final String heading;
         fontSize: 22,
         fontWeight: FontWeight.bold,
         color: themeColor,
-        
+        decoration: TextDecoration.underline,
+        decorationThickness: 1.0, // Adjust the value to increase/decrease the space
+
       ),
       ),
     ),
