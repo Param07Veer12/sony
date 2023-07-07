@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:sony/screens/login_screen/bloc/login_screen_bloc.dart';
 import 'package:sony/screens/otp_screen/bloc/otp_screen_bloc.dart';
+import 'package:sony/screens/welcome_screen/bloc/welcome_screen_bloc.dart';
+import 'package:sony/screens/welcome_screen/view/welcome_screen.dart';
 import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
 
 import '../../../utils/common_widgets/app_logo.dart';
@@ -14,6 +16,9 @@ import '../../../utils/common_widgets/label_heading.dart';
 import '../../../utils/common_widgets/screen_heading.dart';
 import '../../../utils/common_widgets/text_field_outline_border.dart';
 import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
+
+import '../../home_screen/bloc/home_screen_bloc.dart';
+import '../../home_screen/view/home_screen.dart';
 
 part 'login_page.dart';
 part 'mobile_number_text_form_field.dart';
@@ -38,12 +43,12 @@ class _OtpScreenState extends State<OtpScreen> {
         ],
         child: BlocListener<OtpScreenBloc, OtpScreenState>(
          listener: (context, state) {
-        if (state is LoginSucess) {
+        if (state is OtpSucess) {
          
-  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
+   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
                   return BlocProvider(
-                    create: (context)=>OtpScreenBloc(),
-                    child:const OtpScreen() ,
+                    create: (context)=>HomeScreenBloc(),
+                    child:const HomeScreen() ,
                   );
                 }), (route) => false);
                           }else{

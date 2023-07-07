@@ -5,7 +5,7 @@ class _SignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return 
-     BlocBuilder<LoginScreenBloc,LoginScreenState>(
+     BlocBuilder<OtpScreenBloc,OtpScreenState>(
      //   buildWhen: (previous, current) => previous.notValidNumber!=current.notValidNumber,
         builder: (context, state) {
       return SizedBox(
@@ -13,8 +13,8 @@ class _SignInButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: /*state.mobileNumber==""? ()=>context.read<SignInCubit>().checkMobileNumberValidation():*/
           //state.notValidNumber?null
-           ()=> print("sdkbhj"),
-           //context.read<SignInCubit>().callValidateLoginApi(),
+           ()=> 
+           context.read<OtpScreenBloc>().callValidateLoginApi(),
           child: const Text("Submit",style: TextStyle(color: Colors.white,fontSize: 18)),
           style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(customMaterialColor(themeColor)),

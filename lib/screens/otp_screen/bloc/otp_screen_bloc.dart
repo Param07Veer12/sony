@@ -10,4 +10,8 @@ class OtpScreenBloc extends Bloc<OtpScreenEvent, OtpScreenState> {
       // TODO: implement event handler
     });
   }
+  callValidateLoginApi()
+  {
+    emit(OtpSucess());
+  }
 }

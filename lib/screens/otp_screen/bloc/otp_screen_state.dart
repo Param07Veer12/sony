@@ -4,3 +4,6 @@ part of 'otp_screen_bloc.dart';
 abstract class OtpScreenState {}
 
 class OtpScreenInitial extends OtpScreenState {}
+
+class OtpSucess extends OtpScreenState {}
+
