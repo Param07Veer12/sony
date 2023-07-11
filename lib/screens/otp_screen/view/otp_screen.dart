@@ -38,7 +38,7 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     return  MultiBlocProvider(
         providers: [
-          BlocProvider<LoginScreenBloc>(create: (_) => LoginScreenBloc()),
+          BlocProvider<LoginScreenBloc>(create: (_) => LoginScreenBloc(context: context)),
           BlocProvider<OtpScreenBloc>(create: (_) => OtpScreenBloc())
         ],
         child: BlocListener<OtpScreenBloc, OtpScreenState>(

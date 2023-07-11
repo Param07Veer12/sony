@@ -1,8 +1,11 @@
 
 
+import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sony/screens/home_screen/bloc/home_screen_bloc.dart';
+import 'package:sony/screens/home_screen/view/home_screen.dart';
 import 'package:sony/screens/login_screen/bloc/login_screen_bloc.dart';
 import 'package:sony/screens/otp_screen/bloc/otp_screen_bloc.dart';
 import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
@@ -15,7 +18,8 @@ import '../../../utils/common_widgets/text_field_outline_border.dart';
 import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
 
 import '../../otp_screen/view/otp_screen.dart';
-
+import '../../pop_up/view/pop_up_view.dart';
+import 'dart:convert';
 part 'login_page.dart';
 part 'mobile_number_text_form_field.dart';
 part 'sign_in_button.dart';
@@ -29,25 +33,52 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+    final EncryptedSharedPreferences encryptedSharedPreferences =
+      EncryptedSharedPreferences();
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginScreenBloc, LoginScreenState>(
          listener: (context, state) {
-        if (state is LoginSucess) {
-         
-  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
-                  return  BlocProvider(
-                    create: (context)=>OtpScreenBloc(),
-                    child:const OtpScreen() ,
-                  );
-                }), (route) => false);
-                          }else{
-            // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
-            //   return BlocProvider(
-            //     create:(context)=>InboxScreenBloc(context),
-            //     child:const InboxScreen(),
-            //   );
-            // }), (route) => false);
+     if (state.isError) {
+
+              Navigator.of(context).push(PageRouteBuilder(
+                  opaque: false,
+                  pageBuilder: (BuildContext context, _, __) => PopUpView(
+                    popUpTitle: state.errorMessage??"",
+                    voidCallback: () {
+                      Navigator.pop(context);
+                    },
+                  )));
+            } else if (state.success) {
+              encryptedSharedPreferences.setString('accessToken', state.logInDataModel?.accessToken ?? "");
+              encryptedSharedPreferences.setString('refreshToken', state.logInDataModel?.refreshToken ?? "");
+              encryptedSharedPreferences.setString('tokenType', state.logInDataModel?.tokenType ?? "");
+              encryptedSharedPreferences.setString('isChangePasswordRequired', state.logInDataModel?.isChangePasswordRequired == true ? "true" : "false");
+
+
+          encryptedSharedPreferences.getString('accessToken').then((String value) {
+             print(value); 
+             List<String> tokenArray = value.split('.');
+             print(tokenArray); 
+
+             String base64EncodedString = tokenArray[1];
+List<int> res = base64.decode(base64.normalize(base64EncodedString));
+
+String decodedString = utf8.decode(res);
+
+Map<String, dynamic> decryptedMap = jsonDecode(decodedString);
+print(decryptedMap);
+             /// Prints Hello, World!
+          });                // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
+                //   return BlocProvider(
+                //     create: (context)=>HomeScreenBloc(),
+                //     child:const HomeScreen() ,
+                //   );
+                // }), (route) => false);
+
+
              }
         
         

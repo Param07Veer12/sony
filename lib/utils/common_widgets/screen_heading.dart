@@ -6,23 +6,24 @@ class ScreenHeading extends StatelessWidget {
 final String heading;
   @override
   Widget build(BuildContext context) {
-    return  Container(child : FittedBox(
+    return  Column(children : [FittedBox(
       fit: BoxFit.contain,
       child: Text(heading,
       style: const TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.bold,
         color: themeColor,
-        decoration: TextDecoration.underline,
+        // decoration: TextDecoration.underline,
         decorationThickness: 1.0, // Adjust the value to increase/decrease the space
 
       ),
       ),
     ),
-      padding: EdgeInsets.only(
-       bottom: 5,
-       // Space between underline and text
-     ),
+     SizedBox(height: 4
+     ,),
+      SizedBox(height: 2,width: 80,child: Material(color:themeColor),)
+     ]
+      
     //  decoration: BoxDecoration( 
     //      border: Border(bottom: BorderSide(
     //      color: themeColor, 
@@ -31,8 +32,6 @@ final String heading;
     //      // Underline thickness
     //     ))
     //   ),
-      width: 35,
-      height: 35,
       );
   }
 }

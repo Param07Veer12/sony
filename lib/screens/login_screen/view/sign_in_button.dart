@@ -14,7 +14,7 @@ class _SignInButton extends StatelessWidget {
           //state.notValidNumber?null
            ()=> 
           //  print("sdkbhj"),
-           context.read<LoginScreenBloc>().callValidateLoginApi(),
+           context.read<LoginScreenBloc>().callLoginApi(),
           child: const Text("Log In",style: TextStyle(color: Colors.white)),
           style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(customMaterialColor(themeColor)),

@@ -16,9 +16,9 @@ class _EnterPasswordTextFromField extends StatelessWidget {
             child: TextFormField(
               textInputAction: TextInputAction.done,
               cursorColor: Colors.black,
-              onChanged: (mobileNumber) =>
-              print(mobileNumber),
-              // context.read<LoginScreenBloc>().onMobileNumberChange(mobileNumber)
+              onChanged: (password) =>
+             
+              context.read<LoginScreenBloc>().onPasswordChange(password),
                
               decoration: InputDecoration(
                   hintText: '| Enter Password',

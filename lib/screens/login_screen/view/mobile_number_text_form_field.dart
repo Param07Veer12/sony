@@ -15,9 +15,8 @@ class _EnterMobileTextFromField extends StatelessWidget {
             child: TextFormField(
               textInputAction: TextInputAction.done,
               cursorColor: Colors.black,
-              onChanged: (mobileNumber) =>
-              print(mobileNumber),
-              // context.read<LoginScreenBloc>().onMobileNumberChange(mobileNumber)
+              onChanged: (userName) =>
+              context.read<LoginScreenBloc>().onUserNameChange(userName),
                
               decoration: InputDecoration(
                   hintText: '| Enter user name',

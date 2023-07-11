@@ -46,7 +46,7 @@ class _MySplashScreenState extends State<SplashScreen> {
           if(_navigateTo==null||_navigateTo==false){
   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
                   return BlocProvider(
-                    create: (context)=>LoginScreenBloc(),
+                    create: (context)=>LoginScreenBloc(context: context),
                     child:const LoginScreen() ,
                   );
                 }), (route) => false);

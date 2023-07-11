@@ -16,6 +16,7 @@ class _SignInForm extends StatelessWidget {
         _EnterPasswordTextFromField(),
         CustomDivider(height: 60),
         _SignInButton(),
+        SizedBox(height: 50,)
       ],
     ));
   }
