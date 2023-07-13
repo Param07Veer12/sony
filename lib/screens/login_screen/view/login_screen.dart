@@ -54,31 +54,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   )));
             } else if (state.success) {
-              encryptedSharedPreferences.setString('accessToken', state.logInDataModel?.accessToken ?? "");
-              encryptedSharedPreferences.setString('refreshToken', state.logInDataModel?.refreshToken ?? "");
-              encryptedSharedPreferences.setString('tokenType', state.logInDataModel?.tokenType ?? "");
-              encryptedSharedPreferences.setString('isChangePasswordRequired', state.logInDataModel?.isChangePasswordRequired == true ? "true" : "false");
+//               encryptedSharedPreferences.setString('accessToken', state.logInDataModel?.accessToken ?? "");
+//               encryptedSharedPreferences.setString('refreshToken', state.logInDataModel?.refreshToken ?? "");
+//               encryptedSharedPreferences.setString('tokenType', state.logInDataModel?.tokenType ?? "");
+//               encryptedSharedPreferences.setString('isChangePasswordRequired', state.logInDataModel?.isChangePasswordRequired == true ? "true" : "false");
 
 
-          encryptedSharedPreferences.getString('accessToken').then((String value) {
-             print(value); 
-             List<String> tokenArray = value.split('.');
-             print(tokenArray); 
+//           encryptedSharedPreferences.getString('accessToken').then((String value) {
+//              print(value); 
+//              List<String> tokenArray = value.split('.');
+//              print(tokenArray); 
 
-             String base64EncodedString = tokenArray[1];
-List<int> res = base64.decode(base64.normalize(base64EncodedString));
+//              String base64EncodedString = tokenArray[1];
+// List<int> res = base64.decode(base64.normalize(base64EncodedString));
 
-String decodedString = utf8.decode(res);
+// String decodedString = utf8.decode(res);
 
-Map<String, dynamic> decryptedMap = jsonDecode(decodedString);
-print(decryptedMap);
-             /// Prints Hello, World!
-          });             
+// Map<String, dynamic> decryptedMap = jsonDecode(decodedString);
+// print(decryptedMap);
+//              /// Prints Hello, World!
+//           });             
           
              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
                   return BlocProvider(
-                    create: (context)=>WelcomeScreenBloc(),
-                    child:const WelcomeScreen() ,
+                    create: (context)=>OtpScreenBloc(),
+                    child:const OtpScreen() ,
                   );
                 }), (route) => false);
 

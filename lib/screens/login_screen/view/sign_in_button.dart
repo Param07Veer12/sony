@@ -16,10 +16,10 @@ class _SignInButton extends StatelessWidget {
             //state.notValidNumber?null
              ()=> 
             //  print("sdkbhj"),
-             context.read<LoginScreenBloc>().callLoginApi(),
-            child: const Text("Login",style: TextStyle(color: Colors.white,fontSize: 17),),
+            (state.userName != "") && (state.password != "") ? context.read<LoginScreenBloc>().callLoginApi() : print("fef"),
+            child:  Text("Login",style:  TextStyle(color: (state.userName != "") && (state.password != "") ? Colors.white : Colors.grey,fontSize: 17),),
             style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(customMaterialColor(themeColor)),
+                backgroundColor: (state.userName != "") && (state.password != "") ? MaterialStatePropertyAll(customMaterialColor(themeColor)) : MaterialStatePropertyAll(customMaterialColor(Colors.grey.shade50)),
                 fixedSize: MaterialStateProperty.all(const Size.fromHeight(50)),
                 shape: MaterialStateProperty.all(
                     const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))))),

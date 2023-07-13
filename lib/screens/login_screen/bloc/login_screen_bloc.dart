@@ -62,7 +62,10 @@ else
     "browserVersion": ""
       },
     };
-      NetworkClass.fromNetworkClass(postLoginApi, this, reqPostLogin, map).callPostService(_context, true);
+        emit(state.copyWith(success: true, logInDataModel: _logInDataModel, isError: false));
+
+   //   NetworkClass.fromNetworkClass(postLoginApi, this, reqPostLogin, map).callPostService(_context, true);
+
 }
   }
     void onUserNameChange(String value) {
