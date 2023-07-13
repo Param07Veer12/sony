@@ -12,20 +12,19 @@ class _OtpWidget extends StatelessWidget {
         return PinPut(
 
           textStyle: const TextStyle(fontSize: 22, color: Colors.black),
-          obscureText: '●',
+          // obscureText: '●',
           fieldsCount: 6,
           mainAxisSize: MainAxisSize.min,
           focusNode: _pinPutFocusNode,
           submittedFieldDecoration: _pinPutDecoration,
           selectedFieldDecoration: _pinPutDecoration,
-          followingFieldDecoration: _pinPutDecoration,
-          eachFieldMargin: const EdgeInsets.only(left: 10, right: 10),
+          followingFieldDecoration: _unSelectedDecoration,
+          eachFieldMargin: const EdgeInsets.only(left: 5, right: 5),
           keyboardType: const TextInputType.numberWithOptions(signed: true),
           eachFieldHeight: 30,
-          eachFieldWidth: 45,
+          eachFieldWidth: 30,
           onChanged: (otp)=>
-          print("sjcnj"),
-          //context.read<EnterOtpCubit>().onOtpChange(otp),
+         context.read<OtpScreenBloc>().onOtpChange(otp),
           textInputAction: TextInputAction.done,
 
           inputFormatters: [
@@ -41,6 +40,15 @@ class _OtpWidget extends StatelessWidget {
       color: Colors.white,
       borderRadius: BorderRadius.circular(5.0),
       border: Border.all(color: themeColor)
+
+     // border: Border(left: 1.0)
+    );
+  }
+    BoxDecoration get _unSelectedDecoration {
+    return BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(5.0),
+      border: Border.all(color: Colors.grey)
 
      // border: Border(left: 1.0)
     );

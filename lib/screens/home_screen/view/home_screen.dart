@@ -58,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
   ),
+  body:  Image.asset( "assets/images/homeImage.png",width: double.infinity,height: double.infinity,fit: BoxFit.fill),
   endDrawer: DrawerWidget(),
   
   bottomNavigationBar: BottomNavigationBar(
@@ -69,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
     items: bottomNavigationItems,
   ),
 ),
+
     );
 
     

@@ -62,7 +62,7 @@ else
     "browserVersion": ""
       },
     };
-        emit(state.copyWith(success: true, logInDataModel: _logInDataModel, isError: false));
+        emit(state.copyWith(success: true, isError: false));
 
    //   NetworkClass.fromNetworkClass(postLoginApi, this, reqPostLogin, map).callPostService(_context, true);
 

@@ -5,8 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sony/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:sony/screens/home_screen/view/home_screen.dart';
+import 'package:sony/screens/terms_conditions/bloc/terms_and_conditions_bloc.dart';
 import 'package:sony/screens/welcome_screen/bloc/welcome_screen_bloc.dart';
 import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
+
+import '../../terms_conditions/view/term_conditions.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -32,13 +35,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return BlocListener<WelcomeScreenBloc, WelcomeScreenState>(
       listener: (context, state) {
           if (state is HomeScreenLoad) {
-         
-  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
+         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
                   return BlocProvider(
-                    create: (context)=>HomeScreenBloc(),
-                    child:const HomeScreen() ,
+                    create: (context)=>TermsAndConditionsBloc(),
+                    child:const TermsAndCondition() ,
                   );
-                }), (route) => false);
+                }), (route) => false); 
+ 
 
                 
                           }

@@ -12,12 +12,13 @@ class _SignInForm extends StatelessWidget {
         LabelOtp(labelHeading: "Enter 6 - Digit OTP sent to your registered mobile number 98xxxxxx51"),
         CustomDivider(height: 20),
         LabelOtp(labelHeading: "Valid for Next 24 Hours"),
-        CustomDivider(height: 60),
+        CustomDivider(height: 20),
         _ResendButton(),
-        CustomDivider(height: 40),
+        CustomDivider(height: 20),
         _OtpWidget(),
         CustomDivider(height: 60),
         _SignInButton(),
+        CustomDivider(height: 40),
       ],
     ));
   }

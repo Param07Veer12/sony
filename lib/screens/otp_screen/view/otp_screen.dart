@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:sony/screens/login_screen/bloc/login_screen_bloc.dart';
 import 'package:sony/screens/otp_screen/bloc/otp_screen_bloc.dart';
+import 'package:sony/screens/terms_conditions/bloc/terms_and_conditions_bloc.dart';
 import 'package:sony/screens/welcome_screen/bloc/welcome_screen_bloc.dart';
 import 'package:sony/screens/welcome_screen/view/welcome_screen.dart';
 import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
@@ -19,6 +20,7 @@ import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
 
 import '../../home_screen/bloc/home_screen_bloc.dart';
 import '../../home_screen/view/home_screen.dart';
+import '../../terms_conditions/view/term_conditions.dart';
 
 part 'login_page.dart';
 part 'mobile_number_text_form_field.dart';
@@ -43,22 +45,23 @@ class _OtpScreenState extends State<OtpScreen> {
         ],
         child: BlocListener<OtpScreenBloc, OtpScreenState>(
          listener: (context, state) {
-        if (state is OtpSucess) {
+        if (state.success == true) {
          
    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
                   return BlocProvider(
-                    create: (context)=>HomeScreenBloc(),
-                    child:const HomeScreen() ,
+                    create: (context)=>WelcomeScreenBloc(),
+                    child:const WelcomeScreen() ,
                   );
                 }), (route) => false);
-                          }else{
-            // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
-            //   return BlocProvider(
-            //     create:(context)=>InboxScreenBloc(context),
-            //     child:const InboxScreen(),
-            //   );
-            // }), (route) => false);
-             }
+                }
+  // else{
+  //           // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
+  //           //   return BlocProvider(
+  //           //     create:(context)=>InboxScreenBloc(context),
+  //           //     child:const InboxScreen(),
+  //           //   );
+  //           // }), (route) => false);
+  //            }
         
         
 
@@ -72,13 +75,11 @@ class _OtpScreenState extends State<OtpScreen> {
 
                 children: [
                   CustomDivider(height: MediaQuery.of(context).size.height / 7),
+                   const CustomDivider(height: 20),
                   const AppLogo(),
                   const CustomDivider(height: 40),
-                  const ScreenHeading(heading: "Log In"),
-                   const CustomDivider(height: 20),
-                  const LabelMain(labelHeading: "By signing in you agreeing to our"),
-                  const LabelTermsAndCondition(labelHeading: "Terms and privacy policy"),
-                  const CustomDivider(height: 60),
+                  const ScreenHeading(heading: "Verify OTP"),
+                  const CustomDivider(height: 40),
                   const _SignInForm(),
                   const CustomDivider(height: 10),
                   // const _ForgetPassword(),

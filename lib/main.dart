@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Sony',
       theme: ThemeData(
        primarySwatch: customMaterialColor(themeColor),
+       
         useMaterial3: true,
       ),
      

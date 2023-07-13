@@ -10,7 +10,7 @@ final String heading;
       fit: BoxFit.contain,
       child: Text(heading,
       style: const TextStyle(
-        fontSize: 22,
+        fontSize: 18,
         fontWeight: FontWeight.bold,
         color: themeColor,
         // decoration: TextDecoration.underline,
