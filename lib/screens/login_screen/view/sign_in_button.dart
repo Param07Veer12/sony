@@ -9,18 +9,21 @@ class _SignInButton extends StatelessWidget {
         builder: (context, state) {
       return SizedBox(
         width: double.infinity,
-        child: ElevatedButton(
-          onPressed: /*state.mobileNumber==""? ()=>context.read<SignInCubit>().checkMobileNumberValidation():*/
-          //state.notValidNumber?null
-           ()=> 
-          //  print("sdkbhj"),
-           context.read<LoginScreenBloc>().callLoginApi(),
-          child: const Text("Log In",style: TextStyle(color: Colors.white)),
-          style: ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(customMaterialColor(themeColor)),
-              fixedSize: MaterialStateProperty.all(const Size.fromHeight(50)),
-              shape: MaterialStateProperty.all(
-                  const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))))),
+        child: Padding(
+          padding: EdgeInsets.only(left: 20,right: 20),
+          child: ElevatedButton(
+            onPressed: /*state.mobileNumber==""? ()=>context.read<SignInCubit>().checkMobileNumberValidation():*/
+            //state.notValidNumber?null
+             ()=> 
+            //  print("sdkbhj"),
+             context.read<LoginScreenBloc>().callLoginApi(),
+            child: const Text("Login",style: TextStyle(color: Colors.white,fontSize: 17),),
+            style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(customMaterialColor(themeColor)),
+                fixedSize: MaterialStateProperty.all(const Size.fromHeight(50)),
+                shape: MaterialStateProperty.all(
+                    const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))))),
+          ),
         ),
       );
     } );

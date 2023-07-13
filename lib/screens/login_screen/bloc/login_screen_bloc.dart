@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
@@ -72,6 +74,10 @@ else
     final pass = value;
     emit(state.copyWith(
         password: pass, isError: false, success: false));
+  }
+   void onPasswordVisibleChange(bool value) {
+    emit(state.copyWith(
+        passwordVisible: value, isError: false, success: false));
   }
   @override
   void onHTTPError({required int requestCode, required String response}) {

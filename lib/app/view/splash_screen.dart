@@ -1,7 +1,10 @@
 
+import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sony/screens/home_screen/bloc/home_screen_bloc.dart';
+import 'package:sony/screens/home_screen/view/home_screen.dart';
 import 'package:sony/screens/login_screen/bloc/login_screen_bloc.dart';
 import 'package:sony/screens/login_screen/view/login_screen.dart';
 import '../splash_screen_bloc/splash_screen_bloc.dart';
@@ -24,8 +27,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _MySplashScreenState extends State<SplashScreen> {
+ final EncryptedSharedPreferences encryptedSharedPreferences =
+      EncryptedSharedPreferences();
+var alreadyLogin = false;
 
-  var _navigateTo = false;
  @override
   void initState() {
     super.initState();
@@ -43,21 +48,30 @@ class _MySplashScreenState extends State<SplashScreen> {
     return BlocListener<SplashScreenBloc, SplashScreenState>(
          listener: (context, state) {
         if (state is Loaded) {
-          if(_navigateTo==null||_navigateTo==false){
-  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
+  // encryptedSharedPreferences.getString('accessToken').then((String value) {
+  //    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
+  //                 return BlocProvider(
+  //                   create: (context)=>HomeScreenBloc(),
+  //                   child:const HomeScreen() ,
+  //                 );
+  //               }), (route) => false);
+  // }); 
+ 
+ Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
                   return BlocProvider(
                     create: (context)=>LoginScreenBloc(context: context),
                     child:const LoginScreen() ,
                   );
                 }), (route) => false);
-                          }else{
-            // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
-            //   return BlocProvider(
-            //     create:(context)=>InboxScreenBloc(context),
-            //     child:const InboxScreen(),
-            //   );
-            // }), (route) => false);
-             }
+ 
+            //               }else{
+            // // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
+            // //   return BlocProvider(
+            // //     create:(context)=>InboxScreenBloc(context),
+            // //     child:const InboxScreen(),
+            // //   );
+            // // }), (route) => false);
+            //  }
         }
         
 

@@ -15,7 +15,18 @@ class WelcomeScreen extends StatefulWidget {
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
+
+
+   
+
 class _WelcomeScreenState extends State<WelcomeScreen> {
+
+   @override
+  void initState() {
+    super.initState();
+    context.read<WelcomeScreenBloc>().add(NavigateToHomeScreenEvent());
+
+  }
   @override
   Widget build(BuildContext context) {
     return BlocListener<WelcomeScreenBloc, WelcomeScreenState>(
@@ -28,6 +39,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child:const HomeScreen() ,
                   );
                 }), (route) => false);
+
+                
                           }
         // TODO: implement listener
       },

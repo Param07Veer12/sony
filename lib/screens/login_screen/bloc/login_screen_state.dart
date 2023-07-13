@@ -7,6 +7,7 @@ part of 'login_screen_bloc.dart';
     this.userName = "",
     this.password = "",
     this.isError = false,
+    this.passwordVisible = false,
     this.errorMessage,
     this.success=false,
     this.logInDataModel
@@ -18,6 +19,7 @@ part of 'login_screen_bloc.dart';
   final String? password;
   final bool success;
   final LoginModel? logInDataModel;
+  final bool passwordVisible;
 
 LoginScreenState copyWith({
     bool? isError,
@@ -25,7 +27,8 @@ LoginScreenState copyWith({
     bool? success,
     LoginModel? logInDataModel,
     String? userName,
-    String? password
+    String? password,
+    bool? passwordVisible,
 
 
   }) {
@@ -36,6 +39,7 @@ LoginScreenState copyWith({
       logInDataModel:logInDataModel??this.logInDataModel,
       userName:userName??this.userName,
       password:password??this.password,
+      passwordVisible:passwordVisible??this.passwordVisible
     );
   }
 

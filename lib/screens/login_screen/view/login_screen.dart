@@ -8,6 +8,8 @@ import 'package:sony/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:sony/screens/home_screen/view/home_screen.dart';
 import 'package:sony/screens/login_screen/bloc/login_screen_bloc.dart';
 import 'package:sony/screens/otp_screen/bloc/otp_screen_bloc.dart';
+import 'package:sony/screens/welcome_screen/bloc/welcome_screen_bloc.dart';
+import 'package:sony/screens/welcome_screen/view/welcome_screen.dart';
 import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
 
 import '../../../utils/common_widgets/app_logo.dart';
@@ -71,12 +73,14 @@ String decodedString = utf8.decode(res);
 Map<String, dynamic> decryptedMap = jsonDecode(decodedString);
 print(decryptedMap);
              /// Prints Hello, World!
-          });                // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
-                //   return BlocProvider(
-                //     create: (context)=>HomeScreenBloc(),
-                //     child:const HomeScreen() ,
-                //   );
-                // }), (route) => false);
+          });             
+          
+             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
+                  return BlocProvider(
+                    create: (context)=>WelcomeScreenBloc(),
+                    child:const WelcomeScreen() ,
+                  );
+                }), (route) => false);
 
 
              }
@@ -94,11 +98,9 @@ print(decryptedMap);
                 children: [
                   CustomDivider(height: MediaQuery.of(context).size.height / 7),
                   const AppLogo(),
-                  CustomDivider(height: MediaQuery.of(context).size.height / 5),
-                  const ScreenHeading(heading: "Log In"),
+                  CustomDivider(height: MediaQuery.of(context).size.height / 15),
+                  const ScreenHeading(heading: "Login"),
                    const CustomDivider(height: 20),
-                  const LabelMain(labelHeading: "By signing in you agreeing to our"),
-                  const LabelTermsAndCondition(labelHeading: "Terms and privacy policy"),
                   const CustomDivider(height: 20),
                   const _SignInForm(),
                   const CustomDivider(height: 10),

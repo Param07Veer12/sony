@@ -6,12 +6,12 @@ class LabelHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 5),
+      padding: const EdgeInsets.only(bottom: 5,left: 20,right: 20),
       child: Text(labelHeading,
         style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: Colors.grey
+            color: Colors.black
         ),),
     );
   }

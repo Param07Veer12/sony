@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sony/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
 
+import 'bottom_navigationbar_item.dart';
 import 'drawer.dart';
 
 
@@ -62,31 +63,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bottomNavigationBar: BottomNavigationBar(
          type: BottomNavigationBarType.fixed, ///This allow more than 3 items
      backgroundColor: Colors.white,
+     selectedItemColor: themeColor,
     currentIndex: _currentIndex,
      onTap: _onItemTapped,
-    items: const <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: 'Home',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.circle_notifications),
-        label: 'Installation',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.straighten_sharp),
-        label: 'Scheme',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.chat),
-        label: 'Support',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.menu),
-        label: 'Menu',
-        
-      ),
-    ],
+    items: bottomNavigationItems,
   ),
 ),
     );

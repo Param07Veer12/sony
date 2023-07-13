@@ -8,13 +8,13 @@ class _SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        LabelHeading(labelHeading: "User Name"),
+      children:  [
+        LabelHeading(labelHeading: "Username"),
         _EnterMobileTextFromField(),
-        CustomDivider(height: 10),
+        CustomDivider(height: 40),
         LabelHeading(labelHeading: "Password"),
         _EnterPasswordTextFromField(),
-        CustomDivider(height: 60),
+        CustomDivider(height: 100 ),
         _SignInButton(),
         SizedBox(height: 50,)
       ],

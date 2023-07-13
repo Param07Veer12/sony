@@ -19,9 +19,7 @@ final String heading;
       ),
       ),
     ),
-     SizedBox(height: 4
-     ,),
-      SizedBox(height: 2,width: 80,child: Material(color:themeColor),)
+   
      ]
       
     //  decoration: BoxDecoration( 
