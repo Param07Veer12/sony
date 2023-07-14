@@ -5,7 +5,7 @@ class ResponseError implements Exception {
 
   factory ResponseError.fromStatus(String statusCode, String errorMessage) {
     switch (statusCode) {
-      case "E":
+      case "200":
         return ResponseError(errorMessage);
       default:
         return const ResponseError();

@@ -9,7 +9,7 @@ class _SignInForm extends StatelessWidget {
     return Form(child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:  [
-        LabelOtp(labelHeading: "Enter 6 - Digit OTP sent to your registered mobile number 98xxxxxx51"),
+        LabelOtp(labelHeading: "Enter 6 - Digit OTP sent to your registered mobile number " ),
         CustomDivider(height: 20),
         LabelOtp(labelHeading: "Valid for Next 24 Hours"),
         CustomDivider(height: 20),

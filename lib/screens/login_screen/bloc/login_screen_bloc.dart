@@ -11,8 +11,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import '../../../network/network_class.dart';
-import '../../../network/web_urls.dart';
+import '../../../../network/network_class.dart';
+import '../../../../network/web_urls.dart';
 part 'login_screen_event.dart';
 part 'login_screen_state.dart';
 
@@ -62,9 +62,8 @@ else
     "browserVersion": ""
       },
     };
-        emit(state.copyWith(success: true, isError: false));
 
-   //   NetworkClass.fromNetworkClass(postLoginApi, this, reqPostLogin, map).callPostService(_context, true);
+     NetworkClass.fromNetworkClass(postLoginApi, this, reqPostLogin, map).callPostService(_context, true);
 
 }
   }

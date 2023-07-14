@@ -17,7 +17,7 @@ class _SignInButton extends StatelessWidget {
             //state.notValidNumber?null
              ()=> 
              
-             context.read<OtpScreenBloc>().callValidateLoginApi(),
+            state.isValidOtp == true ? context.read<OtpScreenBloc>().callValidateLoginApi() : print("cew"),
             child:  Text("Submit",style: TextStyle(color: state.isValidOtp == true ? Colors.white : Colors.grey,fontSize: 18)),
             style: ButtonStyle(
                 backgroundColor: state.isValidOtp == true ? MaterialStatePropertyAll(customMaterialColor(themeColor)) : MaterialStatePropertyAll(customMaterialColor(Colors.grey.shade50)),

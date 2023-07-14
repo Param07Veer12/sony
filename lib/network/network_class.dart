@@ -7,9 +7,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sony/network/web_urls.dart';
+import 'package:sony/utils/common_widgets/constants.dart';
 
 import '../utils/common_widgets/colors_used/colors_used.dart';
 import 'network_response.dart';
@@ -23,7 +25,9 @@ class NetworkClass {
   AlertDialog? alertDialog;
   bool isShowing = false;
   String filePath = "";
-
+ final EncryptedSharedPreferences encryptedSharedPreferences =
+      EncryptedSharedPreferences();
+    
   NetworkClass(String url, this.networkResponse, this.requestCode) {
     endUrl = url;
   }
@@ -285,21 +289,24 @@ class NetworkClass {
     }
   }
 
-  Future<void> callPostServiceToken(BuildContext context, String myToken, bool showLoader) async {
+  Future<void> callPostServiceToken(BuildContext context, bool showLoader) async {
     try {
       if (showLoader) {
         isShowing = true;
         showLoaderDialog(context);
       }
+      var token = "";
+    encryptedSharedPreferences.getString(ACCESS_TOKEN).then((String value) async {
+    token = "Bearer" + " " + value;
 
-      if (!kReleaseMode) print("PostURL---> ${baseUrl + endUrl} Token--> $myToken");
+      if (!kReleaseMode) print("PostURL---> ${baseUrl + endUrl} Token--> $token");
       if (!kReleaseMode) log("PostParams---->" + jsonBody.toString());
 
       final response = await http.post(
           Uri.parse(
             baseUrl + endUrl,
           ),
-          headers: {'Content-Type': 'application/json', 'token': myToken},
+          headers: {'Content-Type': 'application/json', 'Authorization': token},
           body: jsonEncode(jsonBody));
         print(response); 
       if (!kReleaseMode) log("PostResponse --->" + response.body.toString());
@@ -315,24 +322,15 @@ class NetworkClass {
 
         networkResponse.onHTTPResponse(requestCode: requestCode, response: response.body.toString());
       }
-      // else if(response.statusCode == 401){
-      //   if (showLoader) {
-      //     if (alertDialog != null && isShowing) {
-      //       isShowing = false;
-      //       Navigator.pop(context);
-      //     }
-      //   }
-      //   Navigator.of(context).push(PageRouteBuilder(
-      //       opaque: false,
-      //       pageBuilder: (BuildContext context, _, __) => PopUpView(
-      //         popUpTitle: "Your session expired! login again",
-      //         voidCallback: () {
-      //           SharedPreferencesClass.prefs.clear();
-      //           Navigator.pushAndRemoveUntil(
-      //               context, MaterialPageRoute(builder: (context) => const SignInPage()), (route) => false);
-      //         },
-      //       )));
-      // }
+      else if(response.statusCode == 401){
+        if (showLoader) {
+          if (alertDialog != null && isShowing) {
+            isShowing = false;
+            Navigator.pop(context);
+          }
+        }
+       
+      }
       else {
         if (alertDialog != null && isShowing) {
           isShowing = false;
@@ -340,6 +338,7 @@ class NetworkClass {
         }
         networkResponse.onHTTPError(requestCode: requestCode, response: response.body.toString());
       }
+       }); 
     } on SocketException catch (e) {
       Navigator.pop(context);
       switch (e.osError?.errorCode) {

@@ -20,6 +20,7 @@ import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
 
 import '../../home_screen/bloc/home_screen_bloc.dart';
 import '../../home_screen/view/home_screen.dart';
+import '../../pop_up/view/pop_up_view.dart';
 import '../../terms_conditions/view/term_conditions.dart';
 
 part 'login_page.dart';
@@ -36,15 +37,36 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+
+@override
+  void initState() {
+    
+ context.read<OtpScreenBloc>().setUpInitialData();
+        // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return  MultiBlocProvider(
         providers: [
           BlocProvider<LoginScreenBloc>(create: (_) => LoginScreenBloc(context: context)),
-          BlocProvider<OtpScreenBloc>(create: (_) => OtpScreenBloc())
+          BlocProvider<OtpScreenBloc>(create: (_) => OtpScreenBloc(context: context))
         ],
         child: BlocListener<OtpScreenBloc, OtpScreenState>(
          listener: (context, state) {
+
+              if (state.isError == true) 
+                {
+    Navigator.of(context).push(PageRouteBuilder(
+                  opaque: false,
+                  pageBuilder: (BuildContext context, _, __) => PopUpView(
+                    popUpTitle: state.errorMessage??"",
+                    voidCallback: () {
+                      Navigator.pop(context);
+                    },
+                  )));
+                }
         if (state.success == true) {
          
    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
@@ -54,6 +76,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   );
                 }), (route) => false);
                 }
+             
   // else{
   //           // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
   //           //   return BlocProvider(

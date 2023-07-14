@@ -13,6 +13,7 @@ import 'package:sony/screens/welcome_screen/view/welcome_screen.dart';
 import 'package:sony/utils/common_widgets/colors_used/colors_used.dart';
 
 import '../../../utils/common_widgets/app_logo.dart';
+import '../../../utils/common_widgets/constants.dart';
 import '../../../utils/common_widgets/custom_divider.dart';
 import '../../../utils/common_widgets/label_heading.dart';
 import '../../../utils/common_widgets/screen_heading.dart';
@@ -54,10 +55,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   )));
             } else if (state.success) {
-//               encryptedSharedPreferences.setString('accessToken', state.logInDataModel?.accessToken ?? "");
-//               encryptedSharedPreferences.setString('refreshToken', state.logInDataModel?.refreshToken ?? "");
-//               encryptedSharedPreferences.setString('tokenType', state.logInDataModel?.tokenType ?? "");
-//               encryptedSharedPreferences.setString('isChangePasswordRequired', state.logInDataModel?.isChangePasswordRequired == true ? "true" : "false");
+              encryptedSharedPreferences.setString(ID, state.logInDataModel?.id.toString() ?? "");
+              encryptedSharedPreferences.setString(USER_NAME, state.logInDataModel?.userName ?? "");
+              encryptedSharedPreferences.setString(ROLE_CODE, state.logInDataModel?.roleCode ?? "");
+              encryptedSharedPreferences.setString(BRANCH_CODE, state.logInDataModel?.branchCode ?? "");
+              encryptedSharedPreferences.setString(FULL_NAME, state.logInDataModel?.fullName ?? "");
+              encryptedSharedPreferences.setString(EMAIL_ID, state.logInDataModel?.emailId ?? "");
+              encryptedSharedPreferences.setString(MOBILE_NO, state.logInDataModel?.mobileNo ?? "");
+              encryptedSharedPreferences.setString(STATUS, state.logInDataModel?.status.toString() ?? "");
+              encryptedSharedPreferences.setString(STATUS_NAME, state.logInDataModel?.statusName ?? "");
+              encryptedSharedPreferences.setString(IS_CHANGE_PASS_REQ, state.logInDataModel?.isChangePasswordRequired == true ? "true" : "false");
+              encryptedSharedPreferences.setString(IS_TERM_COND_REQ, state.logInDataModel?.isTermsCondition == true ? "true" : "false");
+              encryptedSharedPreferences.setString(IS_OTP_REQ, state.logInDataModel?.isOtpRequired == true ? "true" : "false");
+              encryptedSharedPreferences.setString(OTP_REF_ID, state.logInDataModel?.otpReferanceId ?? "1");
+              encryptedSharedPreferences.setString(IS_LOC_REQ, state.logInDataModel?.isLocationRequired == true ? "true" : "false");
+              encryptedSharedPreferences.setString(LOC_REF_ID, state.logInDataModel?.locationReferanceId.toString() ?? "");
+              encryptedSharedPreferences.setString(ACCESS_TOKEN, state.logInDataModel?.accessToken ?? "");
+              encryptedSharedPreferences.setString(REFRESH_TOKEN, state.logInDataModel?.refreshToken ?? "");
+              encryptedSharedPreferences.setString(EXPIRE_IN, state.logInDataModel?.expireIn.toString() ?? "");
+              encryptedSharedPreferences.setString(TOKEN_TYPE, state.logInDataModel?.tokenType ?? "");
+              encryptedSharedPreferences.setString(RESP_CODE, state.logInDataModel?.responseCode ?? "");
+              encryptedSharedPreferences.setString(RESP_MESS, state.logInDataModel?.responseMessage ?? "");
+
 
 
 //           encryptedSharedPreferences.getString('accessToken').then((String value) {
@@ -75,13 +94,21 @@ class _LoginScreenState extends State<LoginScreen> {
 //              /// Prints Hello, World!
 //           });             
           
+          
+          
+          // TO CHANGE IN FUTURE
+
+          if (state.logInDataModel?.isOtpRequired == false)
+          {
              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
                   return BlocProvider(
-                    create: (context)=>OtpScreenBloc(),
+                    create: (context)=>OtpScreenBloc(context: context),
                     child:const OtpScreen() ,
                   );
                 }), (route) => false);
 
+
+             }
 
              }
         

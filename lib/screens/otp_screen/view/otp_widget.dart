@@ -24,7 +24,7 @@ class _OtpWidget extends StatelessWidget {
           eachFieldHeight: 30,
           eachFieldWidth: 30,
           onChanged: (otp)=>
-         context.read<OtpScreenBloc>().onOtpChange(otp),
+         context.read<OtpScreenBloc>().onOtpChange(otp) ,
           textInputAction: TextInputAction.done,
 
           inputFormatters: [

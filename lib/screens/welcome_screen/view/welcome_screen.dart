@@ -37,7 +37,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           if (state is HomeScreenLoad) {
          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
                   return BlocProvider(
-                    create: (context)=>TermsAndConditionsBloc(),
+                    create: (context)=>TermsAndConditionsBloc(context: context),
                     child:const TermsAndCondition() ,
                   );
                 }), (route) => false); 
