@@ -41,7 +41,7 @@ class _TermsAndConditionState extends State<TermsAndCondition> {
         {
                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
                   return BlocProvider(
-                    create: (context)=>HomeScreenBloc(),
+                    create: (context)=>HomeScreenBloc(context: context),
                     child:const HomeScreen() ,
                   );
                 }), (route) => false);
@@ -49,24 +49,29 @@ class _TermsAndConditionState extends State<TermsAndCondition> {
         }
 
       },
-      child: Scaffold(
+      child:BlocBuilder<TermsAndConditionsBloc, TermsAndConditionsState>(
+
+        builder: (context, state) {
+          return Scaffold(
   appBar: AppBar(
     centerTitle: false,
     title: const Text('Terms and Condition Agreement?',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),textAlign: TextAlign.left),
     
   ),
- body: const SingleChildScrollView(
-          padding: EdgeInsets.only(left: 16.0,right: 16.0,top: 16.0,bottom: 16.0),
-          child:  Column(children: 
-          [Text(""), 
-         SubmitTermsWidget()
-          ]),
-        ),
+ body:   SingleChildScrollView(
+            padding: EdgeInsets.only(left: 16.0,right: 16.0,top: 16.0,bottom: 16.0),
+            child:  Column(children: 
+            [Text(state.termConditions ?? "Loading..."), 
+           SubmitTermsWidget()
+            ]),
+          ),
+ );
+ }),
         
  
   
 
-),
+
     );
   }
 }

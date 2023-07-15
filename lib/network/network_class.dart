@@ -208,19 +208,22 @@ class NetworkClass {
     }
   }
 
-  Future<void> callGetServiceWithToken(BuildContext context, String myToken, bool showLoader) async {
+  Future<void> callGetServiceWithToken(BuildContext context, bool showLoader) async {
     try {
       if (showLoader) {
         isShowing = true;
         showLoaderDialog(context);
       }
+      var token = "";
+    encryptedSharedPreferences.getString(ACCESS_TOKEN).then((String value) async {
+    token = "Bearer" + " " + value;
 
       if (kDebugMode) {
-        print("URL-->" + baseUrl + endUrl + "token-->" + myToken);
+        print("URL-->" + baseUrl + endUrl + "token-->" + token);
       }
 
       final response = await http
-          .get(Uri.parse(baseUrl + endUrl), headers: {'Content-Type': 'application/json', 'token': myToken});
+          .get(Uri.parse(baseUrl + endUrl), headers: {'Content-Type': 'application/json', 'token': token});
 
       if (kDebugMode) {
         print("Response------->" + response.body.toString());
@@ -266,6 +269,7 @@ class NetworkClass {
         }
         networkResponse.onHTTPError(requestCode: requestCode, response: response.body.toString());
       }
+    });
     } on SocketException catch (e) {
       Navigator.pop(context);
       switch (e.osError?.errorCode) {
@@ -283,6 +287,81 @@ class NetworkClass {
       Navigator.pop(context);
       //commonAlert(context, 'Please! Try Again');
       print('Please! Try Again');
+      print('TimeoutException thrown --> $e');
+    } catch (err) {
+      print('Error While Making network call -> $err');
+    }
+  }
+
+ Future<void> callPatchServiceToken(BuildContext context, bool showLoader, String id ) async {
+    try {
+      if (showLoader) {
+        isShowing = true;
+        showLoaderDialog(context);
+      }
+      var token = "";
+    encryptedSharedPreferences.getString(ACCESS_TOKEN).then((String value) async {
+    token = "Bearer" + " " + value;
+
+      if (!kReleaseMode) print("PostURL---> ${baseUrl + endUrl + "/" + id} Token--> $token");
+      if (!kReleaseMode) log("PostParams---->" + jsonBody.toString());
+
+      final response = await http.patch(
+          Uri.parse(
+            baseUrl + endUrl + "/" + id,
+          ),
+          headers: {'Content-Type': 'application/json', 'Authorization': token},
+          body: jsonEncode(jsonBody));
+        print(response); 
+      if (!kReleaseMode) log("PostResponse --->" + response.body.toString());
+      if (!kReleaseMode) print("StatusCode --->" + response.statusCode.toString());
+
+      if (response.statusCode == 200) {
+        if (showLoader) {
+          if (alertDialog != null && isShowing) {
+            isShowing = false;
+            Navigator.pop(context);
+          }
+        }
+
+        networkResponse.onHTTPResponse(requestCode: requestCode, response: response.body.toString());
+      }
+      else if(response.statusCode == 401){
+        if (showLoader) {
+          if (alertDialog != null && isShowing) {
+            isShowing = false;
+            Navigator.pop(context);
+          }
+        }
+       
+      }
+      else {
+        if (alertDialog != null && isShowing) {
+          isShowing = false;
+          Navigator.pop(context);
+        }
+        networkResponse.onHTTPError(requestCode: requestCode, response: response.body.toString());
+      }
+       }); 
+    } on SocketException catch (e) {
+      Navigator.pop(context);
+      switch (e.osError?.errorCode) {
+        case 7:
+          //commonAlert(context, 'No Internet Connection!');
+          print('no internet connection');
+          networkResponse.onNoInternetAndServerError(message: "No Internet Connection!");
+          break;
+        case 111:
+          //commonAlert(context, 'Unable to connect to server!');
+          print('unable to connect to server');
+          networkResponse.onNoInternetAndServerError(message: "Unable to connect to server!");
+          break;
+      }
+      print('Socket Exception thrown --> $e');
+    } on TimeoutException catch (e) {
+      Navigator.pop(context);
+      //commonAlert(context, 'Please! Try Again');
+      print('Please tyr again ');
       print('TimeoutException thrown --> $e');
     } catch (err) {
       print('Error While Making network call -> $err');

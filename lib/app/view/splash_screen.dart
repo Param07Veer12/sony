@@ -48,14 +48,14 @@ var alreadyLogin = false;
     return BlocListener<SplashScreenBloc, SplashScreenState>(
          listener: (context, state) {
         if (state is Loaded) {
-  // encryptedSharedPreferences.getString('accessToken').then((String value) {
-  //    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
-  //                 return BlocProvider(
-  //                   create: (context)=>HomeScreenBloc(),
-  //                   child:const HomeScreen() ,
-  //                 );
-  //               }), (route) => false);
-  // }); 
+  encryptedSharedPreferences.getString('accessToken').then((String value) {
+     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
+                  return BlocProvider(
+                    create: (context)=>HomeScreenBloc(context: context),
+                    child:const HomeScreen() ,
+                  );
+                }), (route) => false);
+  }); 
  
  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_){
                   return BlocProvider(

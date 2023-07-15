@@ -17,7 +17,13 @@ class HomeScreen extends StatefulWidget {
 }
  
 class _HomeScreenState extends State<HomeScreen> {
-
+  @override
+  void initState() {
+    
+ context.read<HomeScreenBloc>().callGetMenus();
+        // TODO: implement initSxtate
+    super.initState();
+  }
   void _openDrawer(BuildContext context) {
     Scaffold.of(context).openDrawer();
   }
@@ -39,12 +45,16 @@ class _HomeScreenState extends State<HomeScreen> {
       listener: (context, state) {
         // TODO: implement listener
       },
-      child: Scaffold(
+      child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+        builder: (context, state) { 
+          
+         return   Scaffold(
         key: _scaffoldKey,
   appBar: AppBar(
+    elevation: 3,
     title: const Text(''),
      leading: IconButton(
-          icon: SvgPicture.asset('assets/images/appLogo.svg',height: 60,),
+          icon: SvgPicture.asset('assets/images/appLogo.svg',height: 60,width: 100,),
           onPressed: () {
             // Handle menu button press
           },
@@ -58,22 +68,53 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
   ),
-  body:  Image.asset( "assets/images/homeImage.png",width: double.infinity,height: double.infinity,fit: BoxFit.fill),
+  body: 
+ state.success == true ?  Column(children: [
+    buildTopMenus(state.menusModel?.responseData?.topMenus ?? [],context),
+    
+          Padding(
+            padding: EdgeInsets.only(left: 10,right: 10),
+            child: Divider(
+              height: 1,
+              thickness: 1,
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(height: 5,),
+    Expanded(
+      child: Padding(
+        padding : EdgeInsets.only(left: 10,right: 10),
+        child:
+           Image.network(
+                  state.menusModel?.responseData?.banners?[0].icoPath ?? "",
+                  width: double.infinity,
+                  fit: BoxFit.fill
+                ),
+        ),
+    ),
+    
+          ],) : 
+          SizedBox(),
   endDrawer: DrawerWidget(),
   
-  bottomNavigationBar: BottomNavigationBar(
+  bottomNavigationBar: 
+ (state.menusModel?.responseData?.bottomMenus != null) ? BottomNavigationBar(
          type: BottomNavigationBarType.fixed, ///This allow more than 3 items
      backgroundColor: Colors.white,
      selectedItemColor: themeColor,
     currentIndex: _currentIndex,
      onTap: _onItemTapped,
-    items: bottomNavigationItems,
-  ),
-),
+    items: buildNavigationItems(state.menusModel?.responseData?.bottomMenus ?? []),
+  ) : SizedBox()
+) ;}),
 
     );
 
     
 
   }
+
+
+
+ 
 }

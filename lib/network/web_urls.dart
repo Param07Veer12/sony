@@ -14,3 +14,8 @@ const reqPostGetTermCondition=4;
 
 const postAcceptTermCondition = "Users/AcceptTermCondition";
 const reqPostAcceptTermCondition=5; 
+
+const getGetMenus = "Users/GetMenus";
+const reqGetMenus=6; 
+
+
